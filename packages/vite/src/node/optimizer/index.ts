@@ -102,8 +102,7 @@ export async function optimizeDeps(
     browserHash: mainHash,
     optimized: {}
   }
-
-  if (!force) {
+  if (!force && !config.shadowforce) {
     let prevData
     try {
       prevData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'))
@@ -115,7 +114,7 @@ export async function optimizeDeps(
     }
   }
 
-  if (fs.existsSync(cacheDir)) {
+  if (fs.existsSync(cacheDir) && !config.shadowforce) {
     emptyDir(cacheDir)
   } else {
     fs.mkdirSync(cacheDir, { recursive: true })
@@ -128,7 +127,6 @@ export async function optimizeDeps(
     deps = newDeps
     missing = {}
   }
-
   // update browser hash
   data.browserHash = createHash('sha256')
     .update(data.hash + JSON.stringify(deps))

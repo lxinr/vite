@@ -91,7 +91,7 @@ export function esbuildDepPlugin(
                 namespace: 'dep'
               }
             : {
-                path: require.resolve(flatId, {
+                path: require.resolve(qualified[flatId], {
                   paths: [resolveDir]
                 })
               }
@@ -151,10 +151,10 @@ export function esbuildDepPlugin(
         if (!relativePath.startsWith('.')) {
           relativePath = `./${relativePath}`
         }
-
         let contents = ''
         const data = exportsData[id]
         const [imports, exports] = data
+
         if (!imports.length && !exports.length) {
           // cjs
           contents += `export default require("${relativePath}");`

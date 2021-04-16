@@ -151,6 +151,8 @@ export interface UserConfig {
    * @deprecated use `resolve.dedupe` instead
    */
   dedupe?: string[]
+
+  shadowforce?: boolean
 }
 
 export interface SSROptions {
@@ -184,6 +186,7 @@ export type ResolvedConfig = Readonly<
     assetsInclude: (file: string) => boolean
     logger: Logger
     createResolver: (options?: Partial<InternalResolveOptions>) => ResolveFn
+    shadowforce?: boolean
   }
 >
 
