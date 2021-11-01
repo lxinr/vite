@@ -1,6 +1,10 @@
 import { createApp } from './main'
 import { renderToString } from 'vue/server-renderer'
-import path from 'path'
+import path, {resolve} from 'path'
+
+const vue = require('vue')
+const loadConfig = () => require(resolve(__dirname, './config'))
+const config = loadConfig()
 
 export async function render(url, manifest, rootDir) {
   const { app, router } = createApp()

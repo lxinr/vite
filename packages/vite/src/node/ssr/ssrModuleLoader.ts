@@ -156,7 +156,7 @@ async function instantiateModule(
     const AsyncFunction = async function () {}.constructor as typeof Function
     const initModule = new AsyncFunction(
       `global`,
-      `require`,
+      // `require`,
       ssrModuleExportsKey,
       ssrImportMetaKey,
       ssrImportKey,
@@ -166,7 +166,7 @@ async function instantiateModule(
     )
     await initModule(
       context.global,
-      ssrRequire,
+      // ssrRequire,
       ssrModule,
       ssrImportMeta,
       ssrImport,
