@@ -139,7 +139,11 @@ async function instantiateModule(
     }
     return moduleGraph.urlToModuleMap.get(dep)?.ssrModule
   }
-
+  const ssrRequire = (dep: string) => {
+    return require(require.resolve(dep, {
+      paths: [path.dirname(mod.file!)]
+    }))
+  }
   const ssrDynamicImport = (dep: string) => {
     // #3087 dynamic import vars is ignored at rewrite import path,
     // so here need process relative path
@@ -168,6 +172,7 @@ async function instantiateModule(
     const AsyncFunction = async function () {}.constructor as typeof Function
     const initModule = new AsyncFunction(
       `global`,
+      `require`,
       ssrModuleExportsKey,
       ssrImportMetaKey,
       ssrImportKey,
@@ -177,6 +182,7 @@ async function instantiateModule(
     )
     await initModule(
       context.global,
+      ssrRequire,
       ssrModule,
       ssrImportMeta,
       ssrImport,
