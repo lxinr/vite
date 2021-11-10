@@ -162,7 +162,7 @@ cli
   .action(async (root: string, options: BuildOptions & GlobalCLIOptions) => {
     const { build } = await import('./build')
     const buildOptions: BuildOptions = cleanOptions(options)
-    console.log('xxx', buildOptions)
+
     try {
       await build({
         root,
