@@ -170,9 +170,10 @@ async function instantiateModule(
   try {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const AsyncFunction = async function () {}.constructor as typeof Function
+    // console.log('xxx', result.code)
     const initModule = new AsyncFunction(
       `global`,
-      `require`,
+      // `require`,
       ssrModuleExportsKey,
       ssrImportMetaKey,
       ssrImportKey,
@@ -182,7 +183,7 @@ async function instantiateModule(
     )
     await initModule(
       context.global,
-      ssrRequire,
+      // ssrRequire,
       ssrModule,
       ssrImportMeta,
       ssrImport,
