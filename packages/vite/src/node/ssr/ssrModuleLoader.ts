@@ -139,11 +139,11 @@ async function instantiateModule(
     }
     return moduleGraph.urlToModuleMap.get(dep)?.ssrModule
   }
-  const ssrRequire = (dep: string) => {
-    return require(require.resolve(dep, {
-      paths: [path.dirname(mod.file!)]
-    }))
-  }
+  // const ssrRequire = (dep: string) => {
+  //   return require(require.resolve(dep, {
+  //     paths: [path.dirname(mod.file!)]
+  //   }))
+  // }
   const ssrDynamicImport = (dep: string) => {
     // #3087 dynamic import vars is ignored at rewrite import path,
     // so here need process relative path
