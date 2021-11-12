@@ -78,6 +78,7 @@ test('/', async () => {
   })
 
   const html = await (await fetch(url)).text()
+  console.log('xxx', html)
   expect(html).toMatch('Home')
   if (isBuild) {
     // assert correct preload directive generation for async chunks and CSS
